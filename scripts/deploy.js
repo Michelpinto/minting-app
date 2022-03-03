@@ -1,12 +1,21 @@
 const hre = require("hardhat");
+require("@nomiclabs/hardhat-waffle");
 
 async function main() {
-    const Greeter = await hre.ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, Hardhat!");
+    const MintContractFactory = await hre.ethers.getContractFactory("Mint");
+    const mintContract = await MintContractFactory.deploy();
+    await mintContract.deployed();
+    console.log("Contract deployed to:", mintContract.address);
 
-    await greeter.deployed();
+    // call the function
+    let txn = await mintContract.mintYourNft();
+    await txn.wait();
+    console.log("Minted nft #1");
 
-    console.log("Greeter deployed to:", greeter.address);
+    // Mint another nft
+    txn = await mintContract.mintYourNft();
+    await txn.wait();
+    console.log("Minted nft #2");
 }
 
 main()
