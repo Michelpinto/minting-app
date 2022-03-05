@@ -20,6 +20,8 @@ contract Mint is ERC721URIStorage {
     string[] secondWords = ["Hero", "Spider", "Doggy", "Stupid", "Rug", "Scammy","Javascript","Samsung","Whatever","Overrated", "Player", "Armed"];
     string[] thirdWords = ["Pluto", "Peter", "Corny", "Cook", "Colletor", "Naruto","Tanjiro","Oranje","Circle","Designer", "African", "Asian"];
 
+    event NewNFTMinted(address sender, uint256 tokenId);
+
 
     constructor() ERC721 ("SquareNFT", "SQUARE") {
     console.log("This is my first NFT collection, LFG!");
@@ -86,5 +88,7 @@ contract Mint is ERC721URIStorage {
         _setTokenURI(newId, "later");
         console.log("An NFT w/ ID %s has been minted to %s", newId, msg.sender);
         _tokenIds.increment();
+
+        emit NewNFTMinted(msg.sender, newId);
     }
 }
