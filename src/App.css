@@ -18,6 +18,12 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 400px) {
+    .btn-connect {
+        padding: 0 0.5rem;
+    }
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -42,4 +48,16 @@
     cursor: pointer;
     width: 12rem;
     align-self: center;
+}
+
+.message {
+    margin-top: 4rem;
+}
+
+.link {
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
 }

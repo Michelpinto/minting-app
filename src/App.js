@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import MintContractAbi from "./utils/Mint.json";
 import "./App.css";
 
-const OPENSEA_LINK = "";
+const OPENSEA_LINK =
+    "https://testnets.opensea.io/collection/squarenft-hgyknjmrw4";
 const TOTAL_MINT_COUNT = 50;
 
 const mintContract = "0x011d1Fe165b5737B5f8DB02D0DCD9408B1B6882A";
@@ -11,12 +12,12 @@ const mintContract = "0x011d1Fe165b5737B5f8DB02D0DCD9408B1B6882A";
 function App() {
     const [userAcc, setUserAcc] = useState();
     const [connected, setConnected] = useState(false);
+    const [message, setMessage] = useState("");
 
     const checkIfWalletIsConnected = async () => {
         const { ethereum } = window;
 
         if (!ethereum) {
-            console.log("Make sure metamask is connected");
             return;
         } else {
             console.log("We have the ethereum object", ethereum);
@@ -26,7 +27,6 @@ function App() {
 
         if (accounts.length !== 0) {
             const account = accounts[0];
-            console.log("Found an authorized account:", account);
             setUserAcc(account);
 
             setupEventListener();
@@ -99,15 +99,16 @@ function App() {
                     signer
                 );
 
-                console.log("Going to popup wallet to pay gas...");
+                setMessage("Waiting on transaction success... ⏳");
                 let mintTxn = await contract.mintYourNft();
 
-                console.log("Minting... please wait");
+                setMessage("Minting your nft... ⏳");
                 await mintTxn.wait();
 
                 console.log(
                     `Mined, see transaction: https://rinkeby.etherscan.io/tx/${mintTxn.hash}`
                 );
+                setMessage("Nft minted, congrats! 🥳");
             } else {
                 console.log("Ethereum object doesn't exist!");
             }
@@ -139,6 +140,11 @@ function App() {
                 <h3>Each unique. Rare. Ready to moon! 🚀</h3>
                 <button onClick={mintNft}>Mint</button>
             </div>
+
+            <h2 className="message">{message}</h2>
+            <a href={OPENSEA_LINK} className="link">
+                <p>OpenSea collection</p>
+            </a>
         </div>
     );
 }
