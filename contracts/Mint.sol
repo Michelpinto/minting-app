@@ -49,7 +49,7 @@ contract Mint is ERC721URIStorage {
         return uint256(keccak256(abi.encodePacked(input)));
     }
 
-    function mintYourNft() external {
+    function mintYourNft() public {
         uint256 newId = _tokenIds.current();
 
         string memory first = pickFirstRandom(newId);
@@ -85,7 +85,9 @@ contract Mint is ERC721URIStorage {
 
 
         _safeMint(msg.sender, newId);
-        _setTokenURI(newId, "later");
+
+        _setTokenURI(newId, finalTokenUri);
+        
         console.log("An NFT w/ ID %s has been minted to %s", newId, msg.sender);
         _tokenIds.increment();
 

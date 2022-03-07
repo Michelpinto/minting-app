@@ -7,7 +7,7 @@ async function main() {
     await mintContract.deployed();
     console.log("Contract deployed to:", mintContract.address);
 
-    // call the function
+    // // call the function
     // let txn = await mintContract.mintYourNft();
     // await txn.wait();
     // console.log("Minted nft #1");

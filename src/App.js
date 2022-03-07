@@ -4,10 +4,10 @@ import MintContractAbi from "./utils/Mint.json";
 import "./App.css";
 
 const OPENSEA_LINK =
-    "https://testnets.opensea.io/collection/squarenft-hgyknjmrw4";
+    "https://testnets.opensea.io/collection/squarenft-mzgdu7ujth";
 const TOTAL_MINT_COUNT = 50;
 
-const mintContract = "0x011d1Fe165b5737B5f8DB02D0DCD9408B1B6882A";
+const mintContract = "0xCAC6E15475e39B2BE1D181D2e2158278fc842d45";
 
 function App() {
     const [userAcc, setUserAcc] = useState();
